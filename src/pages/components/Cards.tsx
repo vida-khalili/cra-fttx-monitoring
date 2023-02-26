@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Stack, Typography } from "@mui/material";
+import {Grid, Stack, Typography, useMediaQuery} from "@mui/material";
 import Box from "@mui/material/Box";
 import ConstructionWorkerIcon from "src/components/Icons/ConstructionWorkerIcon";
 import HouseholdFamilyIcon from "src/components/Icons/HouseholdFamilyIcon";
@@ -8,6 +8,7 @@ import SunIcon from "src/components/Icons/SunIcon";
 import UsbIcon from "src/components/Icons/UsbIcon";
 import PersianNumber from "src/components/PersianNumber";
 import { SvgIconProps } from "@mui/material/SvgIcon";
+import { useTheme } from "@mui/material/styles";
 
 type IconType =
   | "household-family"
@@ -40,7 +41,11 @@ const Icon = ({ value, ...rest }: { value: IconType } & SvgIconProps) => {
   }
 };
 
-const Card = ({ title, subtitle, amount, icon }: ICardProps) => (
+const Card = ({ title, subtitle, amount, icon }: ICardProps) => {
+  const theme = useTheme();
+  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
+  const isXlarge= useMediaQuery(theme.breakpoints.up("xl"));
+  return(
   <Box
     sx={{
       p: 3,
@@ -54,20 +59,22 @@ const Card = ({ title, subtitle, amount, icon }: ICardProps) => (
       textAlign: "center",
     }}
   >
-    <Typography variant={"h3"} sx={{ height: 43 }}>
+    <Typography variant={"h3"} sx={{ height: 43 }} fontSize={isSmall ? 14 : isXlarge ? 22 : 18}>
       {title}
     </Typography>
-    <Stack direction={"row"} justifyContent={"center"}>
-      <Typography fontSize={30} fontWeight={"bold"}>
+    <Stack direction={"row"} justifyContent={"center"} mt={0.5} alignItems={"center"}>
+      <Typography  mr={1} fontSize={isSmall ? 18 : isXlarge ? 34 : 30} fontWeight={600}>
         {amount}
       </Typography>
-      <Icon value={icon} sx={{ mr: 1 }} />
+      <Icon value={icon}  />
     </Stack>
-    <Typography fontSize={12}>{subtitle}</Typography>
+    <Typography fontSize={isSmall ? 12 : isXlarge ? 18 : 14} fontWeight={500}>{subtitle}</Typography>
   </Box>
-);
+)};
 
-const Cards = () => (
+const Cards = () => {
+
+  return (
   <Grid container spacing={1}>
     <Grid item xl>
       <Card
@@ -110,6 +117,6 @@ const Cards = () => (
       />
     </Grid>
   </Grid>
-);
+)};
 
 export default Cards;

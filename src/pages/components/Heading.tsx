@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
-import sweetTaste from "@/public/tam_shirin_logo.svg";
-import sweetTasteLight from "@/public/tam_shirin_logo_light.svg";
+import sweetTaste from "../../assets/tam_shirin_logo.svg";
+import sweetTasteLight from "../../assets/tam_shirin_logo_light.svg";
 import { StackProps, Typography, TypographyProps } from "@mui/material";
 import GroupStack from "src/components/GroupStack";
 import React, { PropsWithChildren, useEffect, useState } from "react";
@@ -19,7 +19,7 @@ function getFaPageTitle(pageTitle?: string) {
     case "operator-province":
       return "اپراتوری/شهری";
     default:
-      return "مدیریتی";
+      return "مدیـریـتی";
   }
 }
 
@@ -30,7 +30,7 @@ const HeadingTypography = ({
   children,
   ...rest
 }: PropsWithChildren<TypographyProps>) => (
-  <Typography variant={"h5"} {...rest}>
+  <Typography variant={"h5"} textAlign={"center"} {...rest}>
     {children}
   </Typography>
 );
@@ -46,16 +46,17 @@ const Heading = ({ mode, ...rest }: { mode: ThemeModeType } & StackProps) => {
 
   return (
     <GroupStack {...rest}>
-      <Box ml={"auto"} width={130} component={"img"} src={getLogoSrc(mode)} />
-      <Box ml={"auto"} display={"flex"}>
-        <HeadingTypography color="#F7941D">داشبورد</HeadingTypography>
+      <Box  width={130} component={"img"} src={getLogoSrc(mode)} />
+      <Box m={"auto"} display={"flex"}>
+        <HeadingTypography color="#F7941D">داشـبـورد</HeadingTypography>
         <HeadingTypography color={getPageTitleColor(mode)} pr={1} pl={1}>
           {pageTitle}
         </HeadingTypography>
-        <HeadingTypography color={"#F7941D"}>
-          طرح ملی فیبر نوری منازل و کسب و کارها
+        <HeadingTypography  color={"#F7941D"}>
+          طرح مـلی فیبـر نـوری منازل و کسب و کارها
         </HeadingTypography>
       </Box>
+      <Box width={130} />
     </GroupStack>
   );
 };
